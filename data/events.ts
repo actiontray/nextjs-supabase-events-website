@@ -1,10 +1,10 @@
-interface Event {
+export interface EventItem {
   id: string;
   name: string;
   description?: string;
 }
 
-export const events: Event[] = [
+export const events: EventItem[] = [
   {
     name: "DevTools Daily",
   },
