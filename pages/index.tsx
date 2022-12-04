@@ -1,6 +1,7 @@
 import { config } from "@/config";
 import { events } from "@/data/events";
 import Head from "next/head";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -19,13 +20,13 @@ export default function Home() {
         <ul>
           {events.map((event) => (
             <li key={event.id}>
-              <a href={`/events/${event.id}`}>{event.name}</a>
+              <Link href={`/events/${event.id}`}>{event.name}</Link>
             </li>
           ))}
         </ul>
 
         <button>
-          <a href="/events/new">Add Event</a>
+          <Link href="/events/new">Add Event</Link>
         </button>
       </main>
 
