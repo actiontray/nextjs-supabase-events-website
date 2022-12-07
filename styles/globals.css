@@ -25,6 +25,15 @@ a {
   }
   body {
     color: white;
-    background: black;
+    background: rgb(0, 0, 0);
+  }
+}
+@media (prefers-color-scheme: light) {
+  html {
+    color-scheme: light;
+  }
+  body {
+    color: black;
+    background: rgb(240, 240, 240);
   }
 }

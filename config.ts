@@ -1,6 +1,5 @@
 const appName = "Saleor Events";
-const appDescription =
-  "Web-app that manages events which occur under Saleor domain.";
+const appDescription = "Events that occur under Saleor domain.";
 
 interface Config {
   appName: string;
