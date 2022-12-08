@@ -59,27 +59,27 @@ export interface ActionItemRepeatSelectionBase {
 export interface ActionItemRepeatSelectionTime
   extends ActionItemRepeatSelectionBase {
   format: "time";
-  value: ActionItemRepeatSelectionValueTime[];
+  values: ActionItemRepeatSelectionValueTime[];
 }
 export interface ActionItemRepeatSelectionDay
   extends ActionItemRepeatSelectionBase {
   format: "day";
-  value: ActionItemRepeatSelectionValueDay[];
+  values: ActionItemRepeatSelectionValueDay[];
 }
 export interface ActionItemRepeatSelectionWeek
   extends ActionItemRepeatSelectionBase {
   format: "week";
-  value: ActionItemRepeatSelectionValueWeek[];
+  values: ActionItemRepeatSelectionValueWeek[];
 }
 export interface ActionItemRepeatSelectionMonth
   extends ActionItemRepeatSelectionBase {
   format: "month";
-  value: ActionItemRepeatSelectionValueMonth[];
+  values: ActionItemRepeatSelectionValueMonth[];
 }
 export interface ActionItemRepeatSelectionYear
   extends ActionItemRepeatSelectionBase {
   format: "year";
-  value: ActionItemRepeatSelectionValueYear[];
+  values: ActionItemRepeatSelectionValueYear[];
 }
 
 export type ActionItemRepeatSelection =
