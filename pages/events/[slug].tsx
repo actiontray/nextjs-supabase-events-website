@@ -47,7 +47,7 @@ export default function Home({
         <h1 className="text-center text-4xl py-4 px-2">{event.name}</h1>
         <p className="text-center text-xl py-4 px-2">{event.description}</p>
         <p className="text-xl py-1 px-2">Duration:</p>
-        <p className="text-md py-1 px-2">30min</p>
+        <p className="text-md py-1 px-2">{`${event.duration}min`}</p>
         <p className="text-xl py-1 px-2">Repeats:</p>
         <p className="text-md py-1 px-2">Mon, Tue, Wed, Thu, Fri</p>
         <h2 className="text-2xl pt-12 pb-4 px-2">Optimal (soft constraints)</h2>

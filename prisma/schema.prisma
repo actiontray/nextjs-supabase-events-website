@@ -10,9 +10,68 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id          String        @id @default(cuid())
+  email       String        @unique
+  password    String
+  name        String?
+  EventMember EventMember[]
+}
+
 model EventItem {
-  id                    String                  @id @default(cuid())
-  slug                  String                  @unique
-  name                  String
-  description           String?
+  id                     String                   @id @default(cuid())
+  slug                   String                   @unique
+  name                   String
+  description            String?
+  duration               Int? // in minutes
+  EventRepeatInterval    EventRepeatInterval?
+  EventRepeatSelection   EventRepeatSelection?
+  EventPossibleTimeframe EventPossibleTimeframe[]
+  EventExcludedTimeframe EventExcludedTimeframe[]
+  EventMember            EventMember[]
+  eventRepeatIntervalId  String?                  @unique
+  eventRepeatSelectionId String?                  @unique
+}
+
+model EventRepeatInterval {
+  id          String    @id @default(cuid())
+  period      String // minutes, days, weeks, months, years
+  value       Int    // int
+  EventItem   EventItem @relation(fields: [eventItemId], references: [id])
+  eventItemId String    @unique
+}
+
+model EventRepeatSelection {
+  id          String    @id @default(cuid())
+  format      String // time, day, week, month, year
+  value       String // HH:MM, int or Mon,Tue,Wed,Thu,Fri,Sat,Sun, int, int, int
+  EventItem   EventItem @relation(fields: [eventItemId], references: [id])
+  eventItemId String    @unique
+}
+
+model EventPossibleTimeframe {
+  id          String    @id @default(cuid())
+  required    Boolean // determines if this constraint is required or just a preference
+  start       DateTime
+  end         DateTime
+  eventItem   EventItem @relation(fields: [eventItemId], references: [id])
+  eventItemId String
+}
+
+model EventExcludedTimeframe {
+  id          String    @id @default(cuid())
+  required    Boolean // determines if this constraint is required or just a preference
+  start       DateTime
+  end         DateTime
+  eventItem   EventItem @relation(fields: [eventItemId], references: [id])
+  eventItemId String
+}
+
+model EventMember {
+  id          String    @id @default(cuid())
+  required    Boolean // determines if this constraint is required or just a preference
+  user        User      @relation(fields: [userId], references: [id])
+  eventItem   EventItem @relation(fields: [eventItemId], references: [id])
+  userId      String
+  eventItemId String
 }
