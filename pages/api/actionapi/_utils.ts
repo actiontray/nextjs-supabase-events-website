@@ -32,7 +32,7 @@ export const getRepeatSelectionFromEvent = (
   event.EventRepeatSelection
     ? ({
         format: event.EventRepeatSelection.format,
-        value: event.EventRepeatSelection.value,
+        value: event.EventRepeatSelection.value.split(","),
       } as ActionItemRepeatSelection)
     : undefined;
 
