@@ -2,8 +2,8 @@ import {
   ActionItem,
   ActionItemRepeatIntervalPeriod,
   ActionItemRepeatSelection,
-} from "@/types/fields";
-import { EventDataQuery } from "./_types";
+} from "@/types/actionapi/fields";
+import { EventDataQuery } from "@/types/database";
 
 export const getParticipantsFromEvent = (
   event: EventDataQuery
@@ -65,7 +65,7 @@ export const mapEventsToActionItems = (
     id: event.id,
     name: event.name,
     description: event.description || "",
-    url: `/events/${event.id}`,
+    url: `/events/${event.slug}`,
     duration: event.duration || undefined,
     steps: undefined,
     participants: getParticipantsFromEvent(event),
