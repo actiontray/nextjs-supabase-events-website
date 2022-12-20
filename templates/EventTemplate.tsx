@@ -13,7 +13,7 @@ export const EventTemplate: React.FC<EventTemplateProps> = ({ event }) => {
     return (
       <MainContainer>
         <h1 className="text-center text-4xl my-10">{config.appName}</h1>
-        <p className="bg-white dark:bg-gray-900 text-center text-2xl py-4 px-2">
+        <p className="bg-white dark:bg-zinc-800 text-center text-2xl py-4 px-2">
           Event not found
         </p>
       </MainContainer>

@@ -26,7 +26,7 @@ export const EventListTemplate: React.FC<EventListTemplateProps> = ({
             href="/events/new"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           >
-            Add Event
+            Add event
           </Link>
         </button>
       </div>

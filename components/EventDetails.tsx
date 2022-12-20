@@ -7,7 +7,7 @@ interface EventDetailsProps {
 
 export const EventDetails: React.FC<EventDetailsProps> = ({ event }) => {
   return (
-    <div className="bg-white dark:bg-gray-900 my-10">
+    <div className="bg-white dark:bg-zinc-800 my-10">
       <p className="text-center text-xl py-4 px-2">{event.description}</p>
       <p className="text-xl py-1 px-2">Duration:</p>
       <p className="text-md py-1 px-2">{`${event.duration}min`}</p>
@@ -34,7 +34,7 @@ export const EventDetails: React.FC<EventDetailsProps> = ({ event }) => {
             href={`/events/${event.slug}/edit`}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           >
-            Edit Event
+            Edit event
           </Link>
         </button>
       </div>

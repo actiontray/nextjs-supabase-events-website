@@ -25,7 +25,7 @@ a {
   }
   body {
     color: white;
-    background: rgb(0, 0, 0);
+    background: rgb(30, 30, 30);
   }
 }
 @media (prefers-color-scheme: light) {

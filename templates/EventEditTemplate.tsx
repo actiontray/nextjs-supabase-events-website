@@ -4,12 +4,12 @@ import { config } from "@/config";
 import { EventDataQuery } from "@/types/database";
 import React from "react";
 
-interface EventCreateTemplateProps {
+interface EventEditTemplateProps {
   event: EventDataQuery | null;
   onCreate: () => void;
 }
 
-export const EventCreateTemplate: React.FC<EventCreateTemplateProps> = ({
+export const EventEditTemplate: React.FC<EventEditTemplateProps> = ({
   event,
   onCreate,
 }) => {
@@ -17,7 +17,7 @@ export const EventCreateTemplate: React.FC<EventCreateTemplateProps> = ({
     return (
       <MainContainer>
         <h1 className="text-center text-4xl my-10">{config.appName}</h1>
-        <p className="bg-white dark:bg-gray-900 text-center text-2xl py-4 px-2">
+        <p className="bg-white dark:bg-zinc-800 text-center text-2xl py-4 px-2">
           Event not found
         </p>
       </MainContainer>

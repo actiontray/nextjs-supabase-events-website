@@ -12,7 +12,7 @@ export const EventList: React.FC<EventListProps> = ({ events }) => {
         <li key={event.id}>
           <Link
             href={`/events/${event.slug}`}
-            className="block bg-white dark:bg-gray-900 py-2 px-4 rounded"
+            className="block bg-white dark:bg-zinc-800 py-2 px-4 rounded"
           >
             {event.name}
           </Link>

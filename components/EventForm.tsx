@@ -10,7 +10,7 @@ export const EventForm: React.FC<EventFormProps> = ({ event, onSubmit }) => {
   const { register, handleSubmit } = useForm();
 
   return (
-    <div className="bg-white dark:bg-gray-900 my-10">
+    <div className="bg-white dark:bg-zinc-800 my-10">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="py-2 px-2">
           <label htmlFor="name">Name</label>
@@ -61,7 +61,7 @@ export const EventForm: React.FC<EventFormProps> = ({ event, onSubmit }) => {
         <div className="flex justify-end py-6 px-6">
           <button type="submit">
             <div className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-              Save Event
+              Save event
             </div>
           </button>
         </div>
