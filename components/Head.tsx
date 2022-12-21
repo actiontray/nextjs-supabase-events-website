@@ -1,14 +1,12 @@
-import { events } from "@/data/events";
-import { useRouter } from "next/router";
 import { default as NextHead } from "next/head";
 import { config } from "@/config";
+import { EventDataQuery } from "@/types/database";
 
-const Head: React.FC = () => {
-  const router = useRouter();
-  const { id } = router.query;
+interface HeadProps {
+  event?: EventDataQuery | null;
+}
 
-  const event = events.find((event) => event.id === id);
-
+const Head: React.FC<HeadProps> = ({ event }) => {
   return (
     <NextHead>
       <title>

@@ -35,7 +35,7 @@ export default function Home({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <div>
-      <Head />
+      <Head event={event} />
       <EventEditTemplate event={event} onCreate={() => {}} />
     </div>
   );

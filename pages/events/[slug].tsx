@@ -35,7 +35,7 @@ export default function Home({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <div>
-      <Head />
+      <Head event={event} />
       <EventTemplate event={event} />
     </div>
   );
