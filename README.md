@@ -1,4 +1,11 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center">Events Website Template with Next.js and Supabase</h1>
+
+This is a template from which you can start create events website. It is built with:
+- [Next.js](https://nextjs.org/) - framework to create websites,
+- [Supabase](https://supabase.com) - service to store user data and manage user-related features,
+- [Web Actions API](https://github.com/actiontray/web-actions-api) - API to fetch user events details and constraints, intended to be used by [ActionTray events execution planning service](https://actiontray.vercel.app).
+
+<img width="972" alt="Screenshot 2022-12-21 at 23 02 03" src="https://user-images.githubusercontent.com/9825562/209010806-bb638fdc-8f06-487d-ae33-c900d5e8f71d.png">
 
 ## Getting Started
 
