@@ -1,4 +1,5 @@
-import { Constraint, EventDataQuery } from "@/types/database";
+import { EventDataQuery } from "@/types/database";
+import { isOptimalConstraint, isRequiredConstraint } from "@/utils/data";
 import { EventExcludedTimeframe, EventPossibleTimeframe } from "@prisma/client";
 import Link from "next/link";
 import { EventDetailsRow } from "./EventDetailsRow";
@@ -14,12 +15,6 @@ const parseTimeframe = (
 ) => {
   return `${parseDate(timeframe.start)} - ${parseDate(timeframe.end)}`;
 };
-
-const isRequiredConstraint = <T extends Constraint>(constraint: T) =>
-  constraint.required;
-
-const isOptimalConstraint = <T extends Constraint>(constraint: T) =>
-  !constraint.required;
 
 interface EventDetailsProps {
   event: EventDataQuery;
