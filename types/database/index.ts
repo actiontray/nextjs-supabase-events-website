@@ -14,3 +14,7 @@ export type EventDataQuery = EventItem & {
   EventExcludedTimeframe: EventExcludedTimeframe[];
   EventMember: EventMember[];
 };
+
+export interface Constraint {
+  required: boolean;
+}

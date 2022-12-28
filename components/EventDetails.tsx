@@ -1,5 +1,25 @@
-import { EventDataQuery } from "@/types/database";
+import { Constraint, EventDataQuery } from "@/types/database";
+import { EventExcludedTimeframe, EventPossibleTimeframe } from "@prisma/client";
 import Link from "next/link";
+import { EventDetailsRow } from "./EventDetailsRow";
+
+const parseDate = (date: Date) => {
+  const hours = ("0" + date.getUTCHours()).slice(-2);
+  const minutes = ("0" + date.getUTCMinutes()).slice(-2);
+  return `${hours}:${minutes}`;
+};
+
+const parseTimeframe = (
+  timeframe: EventPossibleTimeframe | EventExcludedTimeframe
+) => {
+  return `${parseDate(timeframe.start)} - ${parseDate(timeframe.end)}`;
+};
+
+const isRequiredConstraint = <T extends Constraint>(constraint: T) =>
+  constraint.required;
+
+const isOptimalConstraint = <T extends Constraint>(constraint: T) =>
+  !constraint.required;
 
 interface EventDetailsProps {
   event: EventDataQuery;
@@ -8,26 +28,56 @@ interface EventDetailsProps {
 export const EventDetails: React.FC<EventDetailsProps> = ({ event }) => {
   return (
     <div className="bg-white dark:bg-zinc-800 my-10">
-      <p className="text-center text-xl py-4 px-2">{event.description}</p>
-      <p className="text-xl py-1 px-2">Duration:</p>
-      <p className="text-md py-1 px-2">{`${event.duration}min`}</p>
-      <p className="text-xl py-1 px-2">Repeats:</p>
-      <p className="text-md py-1 px-2">{event.EventRepeatSelection?.value}</p>
+      <table className="w-full">
+        <EventDetailsRow name="Description" value={event.description} />
+        <EventDetailsRow name="Duration" value={`${event.duration}min`} />
+        <EventDetailsRow
+          name="Repeats"
+          value={event.EventRepeatSelection?.value}
+        />
+      </table>
       <h2 className="text-2xl pt-12 pb-4 px-2">Optimal (soft constraints)</h2>
-      <p className="text-xl py-1 px-2">Possible timeframes:</p>
-      <p className="text-md py-1 px-2">13:00-14:00</p>
-      <p className="text-xl py-1 px-2">Excluded timeframes:</p>
-      <p className="text-md py-1 px-2">-</p>
-      <p className="text-xl py-1 px-2">Members - token:</p>
-      <p className="text-md py-1 px-2">Eva Novak - secondtesttoken</p>
-      <p className="text-md py-1 px-2">John Smith - firsttesttoken</p>
+      <table className="w-full">
+        <EventDetailsRow
+          name="Possible timeframes"
+          value={event.EventPossibleTimeframe.filter(isOptimalConstraint)
+            .map(parseTimeframe)
+            .join(", ")}
+        />
+        <EventDetailsRow
+          name="Excluded timeframes"
+          value={event.EventExcludedTimeframe.filter(isOptimalConstraint)
+            .map(parseTimeframe)
+            .join(", ")}
+        />
+        <EventDetailsRow
+          name="Members - token"
+          value={event.EventMember.filter(isOptimalConstraint)
+            .map((member) => `${member.userId} - ...`)
+            .join(", ")}
+        />
+      </table>
       <h2 className="text-2xl pt-12 pb-4 px-2">Required (hard constraints)</h2>
-      <p className="text-xl py-1 px-2">Possible timeframes:</p>
-      <p className="text-md py-1 px-2">12:00-15:00</p>
-      <p className="text-xl py-1 px-2">Excluded timeframes:</p>
-      <p className="text-md py-1 px-2">-</p>
-      <p className="text-xl py-1 px-2">Members - token:</p>
-      <p className="text-md py-1 px-2">Eva Novak - secondtesttoken</p>
+      <table className="w-full">
+        <EventDetailsRow
+          name="Possible timeframes"
+          value={event.EventPossibleTimeframe.filter(isRequiredConstraint)
+            .map(parseTimeframe)
+            .join(", ")}
+        />
+        <EventDetailsRow
+          name="Excluded timeframes"
+          value={event.EventExcludedTimeframe.filter(isRequiredConstraint)
+            .map(parseTimeframe)
+            .join(", ")}
+        />
+        <EventDetailsRow
+          name="Members - token"
+          value={event.EventMember.filter(isRequiredConstraint)
+            .map((member) => `${member.userId} - ...`)
+            .join(", ")}
+        />
+      </table>
       <div className="flex justify-end py-6 px-6">
         <button>
           <Link
