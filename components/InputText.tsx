@@ -6,7 +6,7 @@ import {
 } from "react-hook-form";
 
 interface InputTextProps<T extends FieldValues> {
-  label: string;
+  label?: string;
   name: Path<UnPackAsyncDefaultValues<T>>;
   required?: boolean;
   register: UseFormRegister<T>;
@@ -21,7 +21,12 @@ export function InputText<T extends FieldValues>({
   return (
     <div className="py-2 px-2">
       <label htmlFor={name}>{label}</label>
-      <input type="text" id={name} {...register(name, { required })} />
+      <input
+        className="bg-zinc-200 dark:bg-zinc-700"
+        type="text"
+        id={name}
+        {...register(name, { required })}
+      />
     </div>
   );
 }

@@ -1,6 +1,10 @@
 import { EventDataQuery } from "@/types/database";
 import { isOptimalConstraint, isRequiredConstraint } from "@/utils/data";
-import { EventExcludedTimeframe, EventPossibleTimeframe } from "@prisma/client";
+import {
+  EventExcludedTimeframe,
+  EventMember,
+  EventPossibleTimeframe,
+} from "@prisma/client";
 import Link from "next/link";
 import { EventDetailsRow } from "./EventDetailsRow";
 
@@ -10,11 +14,13 @@ const parseDate = (date: Date) => {
   return `${hours}:${minutes}`;
 };
 
-const parseTimeframe = (
+const mapTimeframeToString = (
   timeframe: EventPossibleTimeframe | EventExcludedTimeframe
 ) => {
   return `${parseDate(timeframe.start)} - ${parseDate(timeframe.end)}`;
 };
+
+const mapMemberToString = (member: EventMember) => `${member.userId} - ...`;
 
 interface EventDetailsProps {
   event: EventDataQuery;
@@ -24,6 +30,7 @@ export const EventDetails: React.FC<EventDetailsProps> = ({ event }) => {
   return (
     <div className="bg-white dark:bg-zinc-800 my-10">
       <table className="w-full">
+        <EventDetailsRow name="Name" value={event.name} />
         <EventDetailsRow name="Description" value={event.description} />
         <EventDetailsRow name="Duration" value={`${event.duration}min`} />
         <EventDetailsRow
@@ -36,19 +43,19 @@ export const EventDetails: React.FC<EventDetailsProps> = ({ event }) => {
         <EventDetailsRow
           name="Possible timeframes"
           value={event.EventPossibleTimeframe.filter(isOptimalConstraint)
-            .map(parseTimeframe)
+            .map(mapTimeframeToString)
             .join(", ")}
         />
         <EventDetailsRow
           name="Excluded timeframes"
           value={event.EventExcludedTimeframe.filter(isOptimalConstraint)
-            .map(parseTimeframe)
+            .map(mapTimeframeToString)
             .join(", ")}
         />
         <EventDetailsRow
           name="Members - token"
           value={event.EventMember.filter(isOptimalConstraint)
-            .map((member) => `${member.userId} - ...`)
+            .map(mapMemberToString)
             .join(", ")}
         />
       </table>
@@ -57,19 +64,19 @@ export const EventDetails: React.FC<EventDetailsProps> = ({ event }) => {
         <EventDetailsRow
           name="Possible timeframes"
           value={event.EventPossibleTimeframe.filter(isRequiredConstraint)
-            .map(parseTimeframe)
+            .map(mapTimeframeToString)
             .join(", ")}
         />
         <EventDetailsRow
           name="Excluded timeframes"
           value={event.EventExcludedTimeframe.filter(isRequiredConstraint)
-            .map(parseTimeframe)
+            .map(mapTimeframeToString)
             .join(", ")}
         />
         <EventDetailsRow
           name="Members - token"
           value={event.EventMember.filter(isRequiredConstraint)
-            .map((member) => `${member.userId} - ...`)
+            .map(mapMemberToString)
             .join(", ")}
         />
       </table>
