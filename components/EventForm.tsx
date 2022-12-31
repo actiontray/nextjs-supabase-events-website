@@ -2,8 +2,9 @@ import { EventDataQuery } from "@/types/database";
 import { useForm } from "react-hook-form";
 import { EventFormRow } from "./EventFormRow";
 
-interface EventFormData {
+export interface EventFormData {
   name: string;
+  slug: string;
   description: string;
   duration: string;
   repeats?: string;
@@ -17,29 +18,71 @@ interface EventFormData {
 
 interface EventFormProps {
   event?: EventDataQuery;
+  disabled?: boolean;
+  formId?: string;
   onSubmit: (data: EventFormData) => void;
 }
 
-export const EventForm: React.FC<EventFormProps> = ({ event, onSubmit }) => {
-  const { register, handleSubmit } = useForm<EventFormData>({
+export const EventForm: React.FC<EventFormProps> = ({
+  event,
+  disabled,
+  formId,
+  onSubmit,
+}) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<EventFormData>({
     defaultValues: {
       name: event?.name,
+      slug: event?.slug,
       description: event?.description || undefined,
+      duration: event?.duration?.toString() || undefined,
     },
   });
 
   return (
-    <div className="bg-white dark:bg-zinc-800 my-10">
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <form id={formId} onSubmit={handleSubmit(onSubmit)}>
+      <div className="bg-white dark:bg-zinc-800 my-10">
         <table className="w-full">
-          <EventFormRow name="name" label="Name" register={register} />
+          <EventFormRow
+            name="name"
+            label="Name"
+            register={register}
+            disabled={disabled}
+            error={!!errors.name}
+            required
+          />
+          <EventFormRow
+            name="slug"
+            label="Slug"
+            register={register}
+            disabled={disabled}
+            error={!!errors.slug}
+            required
+          />
           <EventFormRow
             name="description"
             label="Description"
             register={register}
+            disabled={disabled}
+            error={!!errors.description}
           />
-          <EventFormRow name="duration" label="Duration" register={register} />
-          <EventFormRow name="repeats" label="Repeats" register={register} />
+          <EventFormRow
+            name="duration"
+            label="Duration"
+            register={register}
+            disabled={disabled}
+            error={!!errors.duration}
+          />
+          <EventFormRow
+            name="repeats"
+            label="Repeats"
+            register={register}
+            disabled={disabled}
+            error={!!errors.repeats}
+          />
         </table>
         <h2 className="text-2xl pt-8 pb-4 px-2">Optimal (soft constraints)</h2>
         <table className="w-full">
@@ -47,16 +90,22 @@ export const EventForm: React.FC<EventFormProps> = ({ event, onSubmit }) => {
             name="optimal-possible-timeframes"
             label="Possible timeframes"
             register={register}
+            disabled={disabled}
+            error={!!errors["optimal-possible-timeframes"]}
           />
           <EventFormRow
             name="optimal-excluded-timeframes"
             label="Excluded timeframes"
             register={register}
+            disabled={disabled}
+            error={!!errors["optimal-excluded-timeframes"]}
           />
           <EventFormRow
             name="optimal-members"
             label="Members"
             register={register}
+            disabled={disabled}
+            error={!!errors["optimal-members"]}
           />
         </table>
         <h2 className="text-2xl pt-8 pb-4 px-2">Required (hard constraints)</h2>
@@ -65,26 +114,25 @@ export const EventForm: React.FC<EventFormProps> = ({ event, onSubmit }) => {
             name="required-possible-timeframes"
             label="Possible timeframes"
             register={register}
+            disabled={disabled}
+            error={!!errors["required-possible-timeframes"]}
           />
           <EventFormRow
             name="required-excluded-timeframes"
             label="Excluded timeframes"
             register={register}
+            disabled={disabled}
+            error={!!errors["required-excluded-timeframes"]}
           />
           <EventFormRow
             name="required-members"
             label="Members"
             register={register}
+            disabled={disabled}
+            error={!!errors["required-members"]}
           />
         </table>
-        <div className="flex justify-end py-6 px-6">
-          <button type="submit">
-            <div className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-              Save event
-            </div>
-          </button>
-        </div>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 };

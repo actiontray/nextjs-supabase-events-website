@@ -4,7 +4,7 @@ const nextConfig = {
   swcMinify: true,
   async rewrites() {
     return [
-      { source: "/actionapi/:path*", destination: "/api/actionapi/:path*" },
+      { source: "/actionapi/:path*", destination: "/api/web/actions/:path*" },
     ];
   },
 };

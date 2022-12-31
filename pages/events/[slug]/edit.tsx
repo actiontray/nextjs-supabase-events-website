@@ -1,7 +1,9 @@
 import Head from "@/components/Head";
 import { prismaClient } from "@/data/database";
-import { EventEditTemplate } from "@/templates/EventEditTemplate";
+import useEventUpdate from "@/hooks/useEventUpdate";
+import { EventUpdateTemplate } from "@/templates/EventUpdateTemplate";
 import { EventDataQuery } from "@/types/database";
+import { useRouter } from "next/router";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next/types";
 
 interface Props {
@@ -31,12 +33,26 @@ export const getServerSideProps: GetServerSideProps<Props> = async (props) => {
 };
 
 export default function Home({
-  event,
+  event: defaultEvent,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const router = useRouter();
+
+  const { loading, error, event, eventUpdate } = useEventUpdate({
+    defaultEvent,
+    onSuccess: (event) => {
+      router.push(`/events/${event.slug}`);
+    },
+  });
+
   return (
     <div>
       <Head event={event} />
-      <EventEditTemplate event={event} onCreate={() => {}} />
+      <EventUpdateTemplate
+        loading={loading}
+        error={error}
+        event={event}
+        onUpdate={eventUpdate}
+      />
     </div>
   );
 }

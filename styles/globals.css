@@ -37,3 +37,67 @@ a {
     background: rgb(240, 240, 240);
   }
 }
+
+@layer components {
+  .shadow-on-scroll {
+    /* margin to move div down */
+    margin-top: 34px;
+    /* height: 80px; /* 64 + 16 */
+    height: 112px;
+    position: sticky;
+    bottom: -24px;
+    z-index: 1;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .shadow-on-scroll::before,
+  .shadow-on-scroll::after {
+    content: "";
+    display: block;
+    height: 24px;
+    /* height: 64px; */
+    position: sticky;
+  }
+
+  @media (prefers-color-scheme: light) {
+    .shadow-on-scroll::after {
+      box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.5);
+    }
+  }
+  @media (prefers-color-scheme: dark) {
+    .shadow-on-scroll::after {
+      box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.8);
+    }
+  }
+  .shadow-on-scroll::after {
+    /* bottom: 48px; /* 64 - 16 */
+    bottom: 64px;
+  }
+
+  @media (prefers-color-scheme: light) {
+    .shadow-on-scroll::before {
+      background: linear-gradient(rgba(240, 240, 240, 0.3), rgb(240, 240, 240));
+    }
+  }
+  @media (prefers-color-scheme: dark) {
+    .shadow-on-scroll::before {
+      background: linear-gradient(rgba(30, 30, 30, 0.3), rgb(30, 30, 30));
+    }
+  }
+  .shadow-on-scroll::before {
+    bottom: 0;
+    z-index: 2;
+  }
+
+  .shadow-on-scroll > div {
+    background: orange;
+    /* height: 64px; */
+    height: 88px;
+    /* padding: 20px; */
+    position: sticky;
+    bottom: 0px;
+    margin-bottom: -24px;
+    z-index: 3;
+  }
+}

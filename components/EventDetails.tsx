@@ -31,6 +31,7 @@ export const EventDetails: React.FC<EventDetailsProps> = ({ event }) => {
     <div className="bg-white dark:bg-zinc-800 my-10">
       <table className="w-full">
         <EventDetailsRow name="Name" value={event.name} />
+        <EventDetailsRow name="Slug" value={event.slug} />
         <EventDetailsRow name="Description" value={event.description} />
         <EventDetailsRow name="Duration" value={`${event.duration}min`} />
         <EventDetailsRow
