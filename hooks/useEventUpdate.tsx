@@ -32,7 +32,7 @@ const useEventUpdate = ({ defaultEvent, onSuccess }: UseEventUpdateOpts) => {
             name: formData.name,
             slug: formData.slug,
             description: formData.description,
-            duration: Number(formData.duration),
+            duration: formData.duration,
           },
         } as EventUpdateRequest),
       });

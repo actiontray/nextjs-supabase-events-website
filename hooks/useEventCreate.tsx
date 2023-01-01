@@ -29,7 +29,7 @@ const useEventCreate = ({ onSuccess }: UseEventCreateOpts) => {
             slug: formData.slug,
             name: formData.name,
             description: formData.description,
-            duration: Number(formData.duration),
+            duration: formData.duration,
           },
         } as EventCreateRequest),
       });
