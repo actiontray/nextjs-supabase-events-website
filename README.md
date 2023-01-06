@@ -7,6 +7,14 @@ This is a template from which you can start create events website. It is built w
 
 <img width="972" alt="Screenshot 2022-12-21 at 23 02 03" src="https://user-images.githubusercontent.com/9825562/209010806-bb638fdc-8f06-487d-ae33-c900d5e8f71d.png">
 
+## Project description
+
+Go to [nextjs-supabase-events-website.vercel.app](https://nextjs-supabase-events-website.vercel.app) to see example deployment:
+
+- on [/](https://nextjs-supabase-events-website.vercel.app/) you can see all available events within the website,
+- on [/actionapi/items](https://nextjs-supabase-events-website.vercel.app/actionapi/items) and [/actionapi/state](https://nextjs-supabase-events-website.vercel.app/actionapi/state) you can see all data about available events within the website and users events state accordingly, prepared according to the [Web Actions API](https://github.com/actiontray/web-actions-api).
+
+
 ## Getting Started
 
 First, run the development server:
