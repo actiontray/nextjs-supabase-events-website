@@ -39,6 +39,11 @@ export const EventDetails: React.FC<EventDetailsProps> = ({ event }) => {
           value={event.EventRepeatSelection?.value}
         />
       </table>
+      <h2 className="text-2xl pt-12 pb-4 px-2">Attributes</h2>
+      <table className="w-full">
+        <EventDetailsRow name="Google Meet" value={undefined} />
+        <EventDetailsRow name="Slack" value={undefined} />
+      </table>
       <h2 className="text-2xl pt-12 pb-4 px-2">Optimal (soft constraints)</h2>
       <table className="w-full">
         <EventDetailsRow

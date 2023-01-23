@@ -2,7 +2,12 @@ import { EventDataQuery } from "@/types/database";
 import { useForm } from "react-hook-form";
 import { EventFormRow } from "./EventFormRow";
 
-export interface EventFormData {
+interface EventFormDataAttributes {
+  "attribute-1"?: string;
+  "attribute-2"?: string;
+}
+
+export interface EventFormData extends EventFormDataAttributes {
   name: string;
   slug: string;
   description: string;
@@ -206,6 +211,25 @@ export const EventForm: React.FC<EventFormProps> = ({
               />
             </>
           )}
+        </table>
+        <h2 className="text-2xl pt-8 pb-4 px-2">Attributes</h2>
+        <table className="w-full">
+          <EventFormRow
+            name="attribute-1"
+            label="Google Meet"
+            type="text"
+            register={register}
+            disabled={disabled}
+            error={!!errors["attribute-1"]}
+          />
+          <EventFormRow
+            name="attribute-2"
+            label="Slack"
+            type="text"
+            register={register}
+            disabled={disabled}
+            error={!!errors["attribute-2"]}
+          />
         </table>
         <h2 className="text-2xl pt-8 pb-4 px-2">Optimal (soft constraints)</h2>
         <table className="w-full">
